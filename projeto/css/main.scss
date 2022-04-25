@@ -1,0 +1,114 @@
+@import 'base';
+
+$cor-escura: #333;
+$cor-padrao: #fff;
+$cor-decundaria: #04dd24;
+$cor-shadow: #c6c6c6;
+
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: $cor-escura;
+  width: 100%;
+  height: 100vh;
+}
+
+/*============= MIXIN ===================*/
+@mixin colorText($val) {
+
+  /*============= CONDICIONAL ===================*/
+  @if $val == danger{
+    color: red;
+  }
+  @else if $val == alert{
+    color: yellow,
+  }
+  @else
+  {
+    color: black
+  }
+}
+
+.container
+{
+  background-color: $cor-padrao;
+  /*============= ENCADEAMENTO ===================*/
+  h1{
+    color: $cor-decundaria;
+  }
+}
+
+.container2
+{
+  width: 100%;
+  height: 200px;
+  background-color: $cor-padrao;
+  /*============= CHAMANDO O MIXIN ===================*/
+  @include colorText(sss)
+}
+
+
+/*============= LAÇO DE REPETIÇÃO FOR ===================*/
+@for $i from 1 to 5{
+  .text-#{$i}{
+    font-size: 12px * $i;
+  }
+}
+
+/*============= LISTA CHAVE:VALOR ===================*/
+$colorsA:(color1: blue, color2: green, color3: yellow);
+
+/*============= LAÇO DE REPETIÇÃO EACH ===================*/
+@each $key, $color in $colorsA {
+  .#{color}-text{
+    color:$color
+  }
+}
+
+/*============= LISTA SEM A UTILIZAÇÃO DE CHAVE ===================*/
+$colorsB: gray ,purple, pink;
+
+@each $color in $colorsB {
+  .#{color}-text{
+    color:$color
+  }
+}
+
+
+/*============= REPETIÇÃO EACH COM A LISTA DIRETAMENTE NELE ===================*/
+@each $color in orange, black, navy {
+  .#{color}-text{
+    color:$color
+  }
+}
+
+/*=============HERANÇA ===================*/
+.flex{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body{
+  @extend .flex;
+  flex-direction: column;
+}
+
+/*=============REFERÊNCIA ===================*/
+p{
+  color: red;
+
+  &:hover{
+    color: orange;
+  }
+}
+
+
+
+
